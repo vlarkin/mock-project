@@ -1,22 +1,19 @@
 frontend:
   image: ghcr.io/vlarkin/frontend
-  image_tag: 74d4a08
-
+  image_tag: a8cd49b
 redis:
   image: redis
   image_tag: 6
-
 postgres:
   image: postgres
   image_tag: 15
-
 backend:
   image: ghcr.io/vlarkin/backend
-  image_tag: 74d4a08
+  image_tag: a8cd49b
   secrets:
     version_env: VERSION
     version_key: version
-    version_value: "1.0.1"
+    version_value: "a8cd49b"
     postgres_db_env: POSTGRES_DB
     postgres_db_key: postgres_db
     postgres_db_value: mydatabase

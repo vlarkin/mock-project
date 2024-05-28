@@ -1,6 +1,6 @@
 frontend:
-  image: europe-docker.pkg.dev/skillful-fx-417519/docker-images/frontend
-  image_tag: 1.0.1
+  image: ghcr.io/vlarkin/frontend
+  image_tag: 74d4a08
 
 redis:
   image: redis
@@ -11,8 +11,8 @@ postgres:
   image_tag: 15
 
 backend:
-  image: europe-docker.pkg.dev/skillful-fx-417519/docker-images/backend
-  image_tag: 1.0.1
+  image: ghcr.io/vlarkin/backend
+  image_tag: 74d4a08
   secrets:
     version_env: VERSION
     version_key: version

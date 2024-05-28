@@ -50,7 +50,7 @@ jobs:
         name: Update helm/values.yaml
         uses: mikefarah/yq@master
         with:
-          cmd: yq -i ".frontend.image_tag=strenv(IMAGE_TAG) | .backend.image_tag=strenv(IMAGE_TAG) | .backend.secrets.version_value(IMAGE_TAG)" helm/values.yaml
+          cmd: yq -i ".frontend.image_tag=strenv(IMAGE_TAG) | .backend.image_tag=strenv(IMAGE_TAG) | .backend.secrets.version_value=strenv(IMAGE_TAG)" helm/values.yaml
       -
         name: Push updates to the repository
         run: |

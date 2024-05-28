@@ -31,17 +31,19 @@ jobs:
         name: Set IMAGE_TAG
         run: echo "IMAGE_TAG=$(git rev-parse --short $GITHUB_REF_NAME)" >> $GITHUB_ENV
       -
-        name: Build and push Docker image frontend
+        name: Build and push Docker image - frontend
         uses: docker/build-push-action@v3
         with:
           context: frontend/
+          platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ env.DOCKER_REGISTRY }}/frontend:${{ env.IMAGE_TAG }}
       -
-        name: Build and push Docker image backend
+        name: Build and push Docker image - backend
         uses: docker/build-push-action@v3
         with:
           context: backend/
+          platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ env.DOCKER_REGISTRY }}/backend:${{ env.IMAGE_TAG }}
 

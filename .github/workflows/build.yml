@@ -46,5 +46,16 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ env.DOCKER_REGISTRY }}/backend:${{ env.IMAGE_TAG }}
-
+      -
+        name: Update helm/values.yaml
+        uses: mikefarah/yq@master
+        with:
+          cmd: yq -i ".frontend.image_tag=strenv(IMAGE_TAG) | .backend.image_tag=strenv(IMAGE_TAG) | .backend.secrets.version_value(IMAGE_TAG)" helm/values.yaml
+      -
+        name: Push updates to the repository
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git commit -am "[skip actions] Update helm/values.yaml"
+          git push
 

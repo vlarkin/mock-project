@@ -36,7 +36,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: frontend/
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           push: true
           tags: ${{ env.DOCKER_REGISTRY }}/frontend:${{ env.IMAGE_TAG }}
       -
@@ -44,7 +44,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: backend/
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           push: true
           tags: ${{ env.DOCKER_REGISTRY }}/backend:${{ env.IMAGE_TAG }}
       -

@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: {{ .Release.Namespace | default "default" }} 
+  name: {{ .Release.Namespace | default "default" }}
+  labels:
+    app: {{ .Release.Namespace | default "default" }}
+spec:
+  rules:
+  - host: {{ .Release.Namespace | default "default" }}.test.env
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: frontend
+            port:
+              number: 3000

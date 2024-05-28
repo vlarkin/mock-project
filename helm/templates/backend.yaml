@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  labels:
+    app: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: {{ .Values.backend.image }}:{{ .Values.backend.image_tag }}
+          imagePullPolicy: Always
+          env:
+            - name: {{ .Values.backend.secrets.version_env }}
+              valueFrom:
+                secretKeyRef:
+                  name: mock-apps-secrets
+                  key:  {{ .Values.backend.secrets.version_key }}
+            - name: {{ .Values.backend.secrets.postgres_db_env }}
+              valueFrom:
+                secretKeyRef:
+                  name: mock-apps-secrets
+                  key:  {{ .Values.backend.secrets.postgres_db_key }}
+            - name: {{ .Values.backend.secrets.postgres_user_env }}
+              valueFrom:
+                secretKeyRef:
+                  name: mock-apps-secrets
+                  key:  {{ .Values.backend.secrets.postgres_user_key }}
+            - name: {{ .Values.backend.secrets.postgres_password_env }}
+              valueFrom:
+                secretKeyRef:
+                  name: mock-apps-secrets
+                  key:  {{ .Values.backend.secrets.postgres_password_key }}
+            - name: {{ .Values.backend.secrets.postgres_host_env }}
+              valueFrom:
+                secretKeyRef:
+                  name: mock-apps-secrets
+                  key:  {{ .Values.backend.secrets.postgres_host_key }}
+            - name: {{ .Values.backend.secrets.postgres_port_env }}
+              valueFrom:
+                secretKeyRef:
+                  name: mock-apps-secrets
+                  key:  {{ .Values.backend.secrets.postgres_port_key }}
+            - name: {{ .Values.backend.secrets.redis_host_env }}
+              valueFrom:
+                secretKeyRef:
+                  name: mock-apps-secrets
+                  key:  {{ .Values.backend.secrets.redis_host_key }}
+            - name: {{ .Values.backend.secrets.redis_port_env }}
+              valueFrom:
+                secretKeyRef:
+                  name: mock-apps-secrets
+                  key:  {{ .Values.backend.secrets.redis_port_key }}
+          ports:
+            - containerPort: 5000

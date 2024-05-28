@@ -1,0 +1,40 @@
+frontend:
+  image: europe-docker.pkg.dev/skillful-fx-417519/docker-images/frontend
+  image_tag: 1.0.1
+
+redis:
+  image: redis
+  image_tag: 6
+
+postgres:
+  image: postgres
+  image_tag: 15
+
+backend:
+  image: europe-docker.pkg.dev/skillful-fx-417519/docker-images/backend
+  image_tag: 1.0.1
+  secrets:
+    version_env: VERSION
+    version_key: version
+    version_value: "1.0.1"
+    postgres_db_env: POSTGRES_DB
+    postgres_db_key: postgres_db
+    postgres_db_value: mydatabase
+    postgres_user_env: POSTGRES_USER
+    postgres_user_key: postgres_user
+    postgres_user_value: myuser
+    postgres_password_env: POSTGRES_PASSWORD
+    postgres_password_key: postgres_password
+    postgres_password_value: "" # will be generated automatically
+    postgres_host_env: POSTGRES_HOST
+    postgres_host_key: postgres_host
+    postgres_host_value: postgres
+    postgres_port_env: POSTGRES_PORT
+    postgres_port_key: postgres_port
+    postgres_port_value: "5432"
+    redis_host_env: REDIS_HOST
+    redis_host_key: redis_host
+    redis_host_value: redis
+    redis_port_env: REDIS_PORT
+    redis_port_key: redis_port
+    redis_port_value: "6379"

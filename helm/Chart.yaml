@@ -1,0 +1,4 @@
+apiVersion: v2
+name: mock-project
+description: A simple mock project
+version: 0.1.0

@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: {{ .Values.postgres.image }}:{{ .Values.postgres.image_tag }}
+          imagePullPolicy: Always
+          env:
+            - name: {{ .Values.backend.secrets.postgres_db_env }}
+              valueFrom:
+                secretKeyRef:
+                  name: mock-apps-secrets
+                  key:  {{ .Values.backend.secrets.postgres_db_key }}
+            - name: {{ .Values.backend.secrets.postgres_user_env }}
+              valueFrom:
+                secretKeyRef:
+                  name: mock-apps-secrets
+                  key:  {{ .Values.backend.secrets.postgres_user_key }}
+            - name: {{ .Values.backend.secrets.postgres_password_env }}
+              valueFrom:
+                secretKeyRef:
+                  name: mock-apps-secrets
+                  key:  {{ .Values.backend.secrets.postgres_password_key }}
+          ports:
+            - containerPort: 5432

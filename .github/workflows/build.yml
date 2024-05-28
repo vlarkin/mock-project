@@ -9,6 +9,7 @@ env:
 
 permissions:
   packages: write
+  contents: write
 
 jobs:
   build:

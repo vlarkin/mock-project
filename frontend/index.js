@@ -14,6 +14,7 @@ app.get('/', async (req, res) => {
       <p>Backend: ${versions.backend}</p>
       <p>PostgreSQL: ${versions.postgres}</p>
       <p>Redis: ${versions.redis}</p>
+      <div style="border:2px solid green;text-align:center;padding:1em 0;">Super Cool Feature #1</div>
     `);
   } catch (err) {
     res.status(500).send('Error fetching versions');
